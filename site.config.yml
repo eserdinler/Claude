@@ -7,7 +7,7 @@
 # Sitenin yayımlanacağı tam adres (sonunda / olsun).
 # Karekodlar bu adrese göre üretilir. Adres belli olunca değiştirip yeniden derleyin.
 # Örnek: https://kecioren-ram.meb.k12.tr/ozel-egitim/
-adres: "https://ornek-adres.example/"
+adres: "https://keciorenram.meb.k12.tr/ozel-egitim/"
 
 site_adi: "Keçiören RAM Özel Eğitim"
 site_alt_baslik: "Özel Eğitim E-Bülteni ve Öğretmen Başvuru Kütüphanesi"
