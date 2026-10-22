@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Açık kitap simgesi">
+  <rect width="64" height="64" rx="12" fill="#0a5866"/>
+  <path d="M14 21l17 3v24l-17-3z" fill="#fff"/>
+  <path d="M50 21l-17 3v24l17-3z" fill="#fff"/>
+  <path d="M38.5 16.5h4v10l-2-1.6-2 1.6z" fill="#ffd166"/>
+  <g stroke="#0a5866" stroke-width="1.6" stroke-linecap="round">
+    <path d="M17.5 28.5l10 1.8M17.5 33l10 1.8M17.5 37.5l10 1.8"/>
+    <path d="M46.5 28.5l-10 1.8M46.5 33l-10 1.8M46.5 37.5l-10 1.8"/>
+  </g>
+</svg>

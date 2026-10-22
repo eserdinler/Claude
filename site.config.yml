@@ -1,0 +1,19 @@
+# ------------------------------------------------------------------
+# SİTE AYARLARI
+# Bu dosyayı Not Defteri ile açıp düzenleyebilirsiniz.
+# İki nokta üst üsteden (:) sonraki kısmı değiştirin, soldaki adları değiştirmeyin.
+# ------------------------------------------------------------------
+
+# Sitenin yayımlanacağı tam adres (sonunda / olsun).
+# Karekodlar bu adrese göre üretilir. Adres belli olunca değiştirip yeniden derleyin.
+# Örnek: https://kecioren-ram.meb.k12.tr/ozel-egitim/
+adres: "https://ornek-adres.example/"
+
+site_adi: "Keçiören RAM Özel Eğitim"
+site_alt_baslik: "Özel Eğitim E-Bülteni ve Öğretmen Başvuru Kütüphanesi"
+kurum_adi: "Keçiören Rehberlik ve Araştırma Merkezi · Özel Eğitim Hizmetleri Bölümü"
+
+# Her sayfada "Taslak" etiketi gösterilsin mi? (evet: true, hayır: false)
+# Tek bir sayfadan kaldırmak için o sayfanın başına "taslak: false" yazın.
+taslak_etiketi: true
+taslak_metni: "Taslak · Bu içerik bölüm uzmanlarının kontrolündedir."

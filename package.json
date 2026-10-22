@@ -1,0 +1,17 @@
+{
+  "name": "kecioren-ram-ozel-egitim",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Keçiören RAM Özel Eğitim Hizmetleri Bölümü e-bülteni ve öğretmen başvuru kütüphanesi (statik site)",
+  "type": "module",
+  "scripts": {
+    "derle": "node scripts/derle.mjs",
+    "onizle": "node scripts/onizle.mjs",
+    "build": "node scripts/derle.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "4.1.0",
+    "marked": "15.0.12",
+    "qrcode": "1.5.4"
+  }
+}
