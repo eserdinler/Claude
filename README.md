@@ -49,8 +49,8 @@ ram-site/
 │   │   └── sayi-1/         ← Her sayı ayrı bir klasör
 │   │       ├── _sayi.md            sayının bilgileri (numara, dönem)
 │   │       ├── 00-giris-yazisi.md  giriş yazısı
-│   │       ├── 01-yazi-1.md        yazılar
-│   │       ├── ...
+│   │       ├── 01-...md … 09-...md yazılar
+│   │       │                       (04-isitme-yetersizligi.md gibi)
 │   │       └── 99-arka-kapak.md    arka kapak yazısı
 │   ├── kutuphane/
 │   │   ├── gereksinim/     ← 13 gereksinim türünün her biri bir dosya
@@ -103,7 +103,7 @@ Metin...
 
 **Yer tutucu yazıyı gerçek yazıyla değiştirmek için:**
 
-1. `icerik/bulten/sayi-1/01-yazi-1.md` dosyasını Not Defteri ile açın.
+1. Örneğin `icerik/bulten/sayi-1/04-isitme-yetersizligi.md` dosyasını Not Defteri ile açın.
 2. `baslik`, `yazar`, `brans`, `kurum` satırlarındaki `[... GELECEK]` yazılarını silip gerçek bilgileri yazın.
 3. `gereksinim` satırına yazının ilgili olduğu gereksinim türünü yazın (listeyi [11. bölümde](#11-bilgi-alanları-frontmatter-listesi) bulabilirsiniz). Yazı o türün kütüphane sayfasında **“Bültenden”** başlığı altında kendiliğinden listelenir. Hiçbir türle ilgili değilse `gereksinim: []` bırakın.
 4. İkinci `---` satırının altındaki `[YAZI GELECEK]` yazısını silip yazının metnini yapıştırın.
@@ -125,6 +125,8 @@ kurum: [Örnek İlkokulu, Örnek Ortaokulu]
 ```
 
 Köşeli parantez içindeki açıklama, ekran okuyucu kullanan okurlar içindir; **boş bırakmayın.** Boş bırakırsanız derleme sırasında uyarı görürsünüz.
+
+**Dosya adı = yazının adresi.** Sayı 1'deki henüz konusu belli olmayan gereksinim yazıları şimdilik `01-gereksinim-yazisi-1.md` gibi adlar taşıyor. Konusu belli olunca dosyayı yayımlamadan **önce** yeniden adlandırın (ör. `02-otizm-spektrum-bozuklugu.md`), başlığı ve `gereksinim` alanını doldurun.
 
 **Yazının sırası:** Dosya adının başındaki sayı (`01-`, `02-` …) ve `sira` alanı yazının sayı içindeki yerini belirler. `tur` alanı `giris` olan yazı her zaman başta, `arka-kapak` olan her zaman sonda yer alır.
 
@@ -331,7 +333,7 @@ Ardından siteyi yeniden derleyin.
 
 ### İletişim (`icerik/iletisim.md`)
 
-`adres`, `telefon`, `web` alanlarını doldurun. Telefon numarası sitede seçilip kopyalanabilir metin olarak, yanında “Numarayı kopyala” ve (telefondan bakılırken) “Ara” düğmesiyle gösterilir. Web adresini `https://` ile başlayarak yazın. Adres birden çok satırsa şöyle yazın:
+`adres`, `telefon`, `web` ve `instagram` (başında @ olmadan) alanlarını doldurun. Telefon numarası sitede seçilip kopyalanabilir metin olarak, yanında “Numarayı kopyala” ve (telefondan bakılırken) “Ara” düğmesiyle gösterilir. Web adresini `https://` ile başlayarak yazın. Adres birden çok satırsa şöyle yazın:
 
 ```yaml
 adres: |
@@ -365,5 +367,6 @@ adres: |
 - PWA: `site/sw.js` derleme sırasında tüm sayfaların listesiyle üretilir; içerik değiştikçe sürüm özeti değişir ve eski önbellek silinir. Karekod PNG'leri önbelleğe alınmaz.
 - Okuma ayarları `localStorage` içinde `ram-okuma-ayarlari` anahtarıyla saklanır ve sayfa çizilmeden önce `<head>` içindeki küçük betikle uygulanır.
 - Sesli okuma Web Speech API (`speechSynthesis`) ile `tr-TR` dilinde yapılır; API yoksa düğmeler gizli kalır. Okunan paragraf vurgulanır.
+- Görsel kimlik basılı bültenle aynıdır: başlıklarda Domine, metinde Nunito Sans; lacivert `#1F3A4D` ve kiremit (`#B4532A`, metinde AA kontrastı için `#9A4522`). Yazı tipleri `@fontsource` paketlerinden derleme sırasında `site/assets/yazitipleri/` klasörüne kopyalanır (SIL Open Font License); böylece internetsiz de aynı görünür.
 - Karekodlar `qrcode` paketiyle SVG ve PNG olarak üretilir. Uygulama simgeleri derleme betiği içinde ek paket gerektirmeden üretilir.
 - Erişilebilirlik denetimi axe-core ile tüm sayfa türlerinde; açık, koyu, yüksek kontrast ve en büyük yazı + geniş aralık ayarlarında, 375 piksel genişlikte yapılmıştır.

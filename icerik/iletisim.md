@@ -2,9 +2,8 @@
 baslik: İletişim
 kurum: Keçiören Rehberlik ve Araştırma Merkezi
 bolum: Özel Eğitim Hizmetleri Bölümü
-adres: "[ADRES GELECEK]"
-telefon: "[TELEFON GELECEK]"
-web: "[WEB SİTESİ GELECEK]"
+adres: "Atapark Mah. 345 Cad. Ufuktepe Ortaokulu No: 2 Keçiören / Ankara"
+telefon: "(0312) 316 23 72"
+web: "https://keciorenram.meb.k12.tr"
+instagram: "ramkecioren"
 ---
-
-Özel eğitim hizmetleriyle ilgili sorularınız için kurumumuza aşağıdaki bilgilerden ulaşabilirsiniz.

@@ -454,11 +454,12 @@ function sayfa({ yol, baslik, aciklama = '', govde, yolIzi = [], taslak = true, 
 <title>${kacis(tamBaslik)}</title>
 <meta name="description" content="${kacis(aciklama || SITE.altBaslik)}">
 ${ADRES_ORNEK ? '' : `<link rel="canonical" href="${kacis(kalici)}">`}
-<meta name="theme-color" content="#0a5866">
+<meta name="theme-color" content="#1f3a4d">
 <link rel="manifest" href="${kok}manifest.webmanifest">
 <link rel="icon" href="${kok}simgeler/simge.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${kok}simgeler/simge-180.png">
 <script>${AYAR_BETIGI}</script>
+<link rel="stylesheet" href="${kok}assets/yazitipleri/yazitipleri.css">
 <link rel="stylesheet" href="${kok}assets/stil.css">
 <script src="${kok}assets/uygulama.js" defer></script>
 </head>
@@ -883,6 +884,7 @@ ${
   const giris = iletisim.govde.trim() ? cevir(iletisim.govde, { kok, derinlik: 1, dosya: iletisim.dosya }).html : '';
   const web = String(b.web || '');
   const webGercek = /^https?:\/\//.test(web);
+  const instagram = String(b.instagram || '').replace(/^@/, '').trim();
   yaz(
     `${yol}index.html`,
     sayfa({
@@ -908,6 +910,12 @@ ${giris}
     </dd>
     <dt>Web sitesi</dt>
     <dd>${webGercek ? `<a class="dis-baglanti" href="${kacis(web)}" rel="noopener">${kacis(web.replace(/^https?:\/\//, ''))}</a>` : yerTutucu(kacis(web || '[WEB SİTESİ GELECEK]'))}</dd>
+    ${
+      instagram
+        ? `<dt>Instagram</dt>
+    <dd><a class="dis-baglanti" href="https://www.instagram.com/${encodeURIComponent(instagram)}/" rel="noopener">@${kacis(instagram)}</a></dd>`
+        : ''
+    }
   </dl>
 </div>`,
     })
@@ -1015,6 +1023,7 @@ ${liste
 // ------------------------------------------------------------------
 
 kopyalaKlasor(path.join(KAYNAK, 'assets'), path.join(CIKTI, 'assets'));
+yazitipleriniKopyala();
 fs.mkdirSync(path.join(CIKTI, 'simgeler'), { recursive: true });
 fs.copyFileSync(path.join(KAYNAK, 'simge.svg'), path.join(CIKTI, 'simgeler', 'simge.svg'));
 for (const boyut of [180, 192, 512]) {
@@ -1041,8 +1050,8 @@ yaz(
       start_url: './',
       scope: './',
       display: 'standalone',
-      background_color: '#ffffff',
-      theme_color: '#0a5866',
+      background_color: '#fffdf9',
+      theme_color: '#1f3a4d',
       icons: [
         { src: 'simgeler/simge-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
         { src: 'simgeler/simge-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
@@ -1103,13 +1112,52 @@ AddDefaultCharset utf-8
 );
 
 // ------------------------------------------------------------------
+// Yazı tipleri: bültenle aynı yazı tipleri (Domine, Nunito Sans) siteye gömülür,
+// böylece internetsiz de aynı görünür. Lisans: SIL Open Font License.
+// ------------------------------------------------------------------
+
+function yazitipleriniKopyala() {
+  const ARALIK = {
+    latin:
+      'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD',
+    'latin-ext':
+      'U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF',
+  };
+  const AILELER = [
+    { ad: 'Domine', paket: 'domine', bicemler: ['normal'] },
+    { ad: 'Nunito Sans', paket: 'nunito-sans', bicemler: ['normal', 'italic'] },
+  ];
+  const hedef = path.join(CIKTI, 'assets', 'yazitipleri');
+  fs.mkdirSync(hedef, { recursive: true });
+  let css = '/* Domine ve Nunito Sans · SIL Open Font License 1.1 (lisans metinleri bu klasörde) */\n';
+  for (const a of AILELER) {
+    const klasor = path.join(KOK, 'node_modules', '@fontsource', a.paket);
+    if (!fs.existsSync(klasor)) {
+      uyar(`${a.ad} yazı tipi bulunamadı; "npm install" komutunu çalıştırın. Site sistem yazı tipiyle derlendi.`);
+      continue;
+    }
+    fs.copyFileSync(path.join(klasor, 'LICENSE'), path.join(hedef, `LICENSE-${a.paket}.txt`));
+    for (const bicem of a.bicemler) {
+      for (const agirlik of [400, 700]) {
+        for (const [alt, aralik] of Object.entries(ARALIK)) {
+          const dosya = `${a.paket}-${alt}-${agirlik}-${bicem}.woff2`;
+          fs.copyFileSync(path.join(klasor, 'files', dosya), path.join(hedef, dosya));
+          css += `@font-face{font-family:'${a.ad}';font-style:${bicem};font-weight:${agirlik};font-display:swap;src:url(${dosya}) format('woff2');unicode-range:${aralik}}\n`;
+        }
+      }
+    }
+  }
+  fs.writeFileSync(path.join(hedef, 'yazitipleri.css'), css);
+}
+
+// ------------------------------------------------------------------
 // Uygulama simgesi (PNG) — ek kütüphane gerektirmeden üretilir
 // ------------------------------------------------------------------
 
 function simgePng(n) {
-  const zemin = [10, 88, 102];
-  const beyaz = [255, 255, 255];
-  const sari = [255, 209, 102];
+  const zemin = [31, 58, 77];
+  const beyaz = [255, 253, 249];
+  const sari = [180, 83, 42];
   const satirlar = [];
   for (let y = 0; y < n; y++) {
     const satir = Buffer.alloc(1 + n * 3);

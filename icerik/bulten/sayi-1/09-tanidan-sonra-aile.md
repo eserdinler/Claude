@@ -1,12 +1,13 @@
 ---
-baslik: "[YAZI 2 BAŞLIĞI GELECEK]"
+baslik: "Tanıdan sonra aile"
 tur: yazi
-sira: 2
+sira: 9
 yazar: "[YAZAR ADI GELECEK]"
 brans: "[BRANŞ GELECEK]"
 kurum: "[KURUM GELECEK]"
+ozet: "Öğretmen olarak nasıl eşlik edebilirim?"
 gereksinim: []
-etiketler: []
+etiketler: [aile]
 taslak: true
 ---
 
